@@ -87,9 +87,6 @@ class_labels = list(test_generator.class_indices.keys())
 print("Classification Report:")
 print(classification_report(true_classes, predicted_classes, target_names=class_labels))
 
-# =====================================================================
-# 🧩 Tambahan: Fungsi untuk menghitung dan menampilkan metrik + plot
-# =====================================================================
 def hitung_dan_plot_metrik(y_true, y_pred, label_kelas):
     precision, recall, f1, _ = precision_recall_fscore_support(y_true, y_pred, labels=range(len(label_kelas)))
 
@@ -103,7 +100,6 @@ def hitung_dan_plot_metrik(y_true, y_pred, label_kelas):
     print(f"   Rata-rata Macro F1-Score  : {np.mean(f1):.4f}")
     print("=" * 70)
 
-    # 🔹 Plot Precision, Recall, dan F1 per kelas
     x = np.arange(len(label_kelas))
     width = 0.25
 
@@ -121,10 +117,7 @@ def hitung_dan_plot_metrik(y_true, y_pred, label_kelas):
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
     plt.show()
-
-# Panggil fungsi tambahan
 hitung_dan_plot_metrik(true_classes, predicted_classes, class_labels)
-# =====================================================================
 
 cm = confusion_matrix(true_classes, predicted_classes)
 plt.figure(figsize=(10, 8))

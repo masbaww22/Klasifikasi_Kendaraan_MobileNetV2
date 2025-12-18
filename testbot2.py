@@ -9,9 +9,8 @@ import tkinter as tk
 from tkinter import filedialog
 import requests
 from datetime import datetime
-import time  # ✅ Tambahan untuk mengukur waktu
+import time 
 
-# ✅ TAMBAHAN: daftar latency kirim telegram
 latency_log = []
 
 ADMIN_BOT_TOKEN = "8101962639:AAHfBs21gifDIQK6BKxBLrMNeU7wMJA1Yj0"
@@ -63,7 +62,6 @@ def send_to_telegram(bot_token, chat_id, message, image_path=None):
     total_duration = total_end - total_start
     print(f"✅ Total waktu komunikasi ke Telegram: {total_duration:.3f} detik\n")
 
-    # ✅ TAMBAHAN: simpan latency ke log
     latency_log.append({
         "chat_id": chat_id,
         "file": os.path.basename(image_path) if image_path else "tanpa_gambar",
@@ -73,7 +71,6 @@ def send_to_telegram(bot_token, chat_id, message, image_path=None):
     return True
 
 
-# ============ KODE ASLI KAMU TETAP ===============
 dataset_path = r"C:\Users\T14s\Documents\python_Kp\archive_vehicle"
 model_path = "vehicle_classifier.keras"
 
@@ -134,8 +131,6 @@ except Exception as e:
 
 print("Model berhasil diload")
 model.summary()
-# =================================================
-
 
 def pilih_gambar_dari_explorer():
     root = tk.Tk()
@@ -151,8 +146,6 @@ def pilih_gambar_dari_explorer():
     )
     return file_path
 
-
-# ✅ TAMBAHAN: pilih satu gambar dari setiap kelas
 def pilih_gambar_per_kelas(base_folder, class_labels):
     root = tk.Tk()
     root.withdraw()
@@ -193,8 +186,6 @@ def predict_single_image(image_path, model, img_size=224):
     }
     return results
 
-
-# ✅ TAMBAHAN: fungsi plot grafik latency
 def plot_latency_graph(latency_log):
     if not latency_log:
         print("Tidak ada data latency untuk ditampilkan.")
@@ -212,11 +203,6 @@ def plot_latency_graph(latency_log):
         plt.text(val + 0.01, i, f"{val:.2f}s", va='center')
     plt.tight_layout()
     plt.show()
-
-
-# ==========================================================
-# BAGIAN UTAMA — DITAMBAHKAN FITUR MULTI-KELAS TANPA MENGUBAH STRUKTUR
-# ==========================================================
 
 print("\n" + "="*70)
 print("SISTEM KLASIFIKASI JENIS KENDARAAN")
@@ -257,7 +243,6 @@ for cls, image_path in selected_images.items():
     except Exception as e:
         print(f"Error selama prediksi {image_path}: {e}")
 
-# ✅ TAMBAHAN: tampilkan grafik latency setelah semua pengiriman selesai
 print("\nMenampilkan grafik latency notifikasi Telegram...")
 plot_latency_graph(latency_log)
 

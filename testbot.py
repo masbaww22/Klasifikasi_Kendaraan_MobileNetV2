@@ -9,7 +9,7 @@ import tkinter as tk
 from tkinter import filedialog
 import requests
 from datetime import datetime
-import time  # ✅ Tambahan untuk mengukur waktu
+import time  
 
 ADMIN_BOT_TOKEN = "8101962639:AAHfBs21gifDIQK6BKxBLrMNeU7wMJA1Yj0"
 SECURITY_BOT_TOKEN = "7993325231:AAG0rtpJFCgMQ7mVaI_1OKD2rRkiNkMDKiw"
@@ -22,7 +22,6 @@ def send_to_telegram(bot_token, chat_id, message, image_path=None):
     print(f"Panjang pesan: {len(message)}")
     print(f"Pesan preview: {message[:200]}...")
 
-    # ✅ Mulai ukur waktu komunikasi ke Telegram
     total_start = time.time()
 
     text_url = f"{base_url}/sendMessage"
@@ -31,7 +30,6 @@ def send_to_telegram(bot_token, chat_id, message, image_path=None):
         "text": message
     }
 
-    # ✅ Ukur waktu kirim pesan teks
     start_text = time.time()
     response = requests.post(text_url, params=params)
     end_text = time.time()
@@ -44,7 +42,6 @@ def send_to_telegram(bot_token, chat_id, message, image_path=None):
 
     print(f"Pesan berhasil dikirim ke chat ID {chat_id}")
 
-    # ✅ Ukur waktu kirim gambar jika ada
     if image_path and os.path.exists(image_path):
         photo_url = f"{base_url}/sendPhoto"
         with open(image_path, 'rb') as img_file:
@@ -65,14 +62,12 @@ def send_to_telegram(bot_token, chat_id, message, image_path=None):
 
         print(f"Gambar berhasil dikirim ke chat ID {chat_id}")
 
-    # ✅ Akhiri waktu total komunikasi
     total_end = time.time()
     total_duration = total_end - total_start
     print(f"✅ Total waktu komunikasi ke Telegram: {total_duration:.3f} detik\n")
 
     return True
 
-# ⬇️ Semua kode di bawah ini tetap sama persis seperti milikmu
 dataset_path = r"C:\Users\T14s\Documents\python_Kp\archive_vehicle"
 model_path = "vehicle_classifier.keras"
 
